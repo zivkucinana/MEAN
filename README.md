@@ -1,1 +1,0 @@
-![Alt text](/Screenshots/new-order.PNG?raw=true "Application Screenshot")
