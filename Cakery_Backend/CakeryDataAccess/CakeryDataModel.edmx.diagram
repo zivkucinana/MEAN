@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="22ebbf3d1942472a87ab611f01273d7d" Name="Diagram1">
+        <EntityTypeShape EntityType="cakery_databaseModel.Order" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="cakery_databaseModel.OrderItem" Width="1.5" PointX="5.125" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="cakery_databaseModel.Product" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="cakery_databaseModel.FK_OrderItem_Product" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="cakery_databaseModel.Role" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="cakery_databaseModel.User" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="cakery_databaseModel.UserClaim" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="cakery_databaseModel.UserLogin" Width="1.5" PointX="5.25" PointY="7.75" />
+        <AssociationConnector Association="cakery_databaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="cakery_databaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="cakery_databaseModel.UserRole" />
+        <AssociationConnector Association="cakery_databaseModel.FK_Order_User" />
+        <AssociationConnector Association="cakery_databaseModel.FK_OrderItem_Order" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

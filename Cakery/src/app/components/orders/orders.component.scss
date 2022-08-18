@@ -1,0 +1,11 @@
+//--bs-primary-rgb: 233, 84, 32;
+
+.card:hover {
+    border: solid;
+    border-width: 1px;
+    border-color: green;
+    h5 {
+        color: rgb(233, 84, 32);
+    };
+    cursor:grab;
+}

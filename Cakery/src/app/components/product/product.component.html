@@ -1,0 +1,98 @@
+<div *ngIf="isLoading" class="text-center">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" style="width: 10rem; height: 10rem; border-width: 0.5rem; margin: 50px;" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+    <h4>Loading...</h4>
+</div>
+
+<div *ngIf="error != undefined" class="container" style="padding: 20px; margin-bottom: 30px; margin-top: 30px;">
+    <div class="alert alert-dismissible alert-danger">
+        <strong>There's no data found for product where product ID is {{ id }}.</strong>
+        <hr>
+        <p>Original error: </p>
+        <span>Status: <strong>{{ error.status }}, {{ error.statusText }}</strong></span>
+        <br>
+        <span>Message: <strong>{{ error.error.message }}</strong></span>
+      </div>
+</div>
+
+<div class="container border-dark" *ngIf="newProduct || (!isLoading && isDataAvailable)">
+    <form #form=ngForm class="row">
+        <div class="col-8">
+            <div style="width: 70%;" class="alert alert-dismissible alert-success" *ngIf="isUpdated">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>{{ message }}</strong>
+            </div>
+            <div style="width: 70%;" class="alert alert-dismissible alert-danger" *ngIf="hasError">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>{{ message }}</strong>
+            </div>
+                <div class="form" style="width: 70%;">
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-primary" type="submit" (click)="onSave(Image)" [disabled]="product.imagePath=='' || 
+                                product.price == null || product.price <= 0 || product.promotion < 0 || product.promotion > 100 || 
+                                product.name == null || product.name == '' || !form.valid">Save <i class="fas fa-save"></i></button>
+                        </div>
+                        <div class="col" style="text-align: right;">
+                            <button class="btn btn-warning" [disabled]="newProduct" (click)="onDelete()">Delete <i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label class="col-form-label mt-4" for="name" style="margin-left: 10px;"><strong><i class="fas fa-file-signature"></i></strong> Product
+                            Name:</label>
+                        <input type="text" autofocus id="name" class="form-control" name="name" placeholder="Product Name" [(ngModel)]="product.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="form-label mt-4" style="margin-left: 10px;"><strong><i class="fas fa-pencil-alt"></i></strong> Product
+                            Description:</label>
+                        <textarea class="form-control" id="description" name="description" rows="5"
+                            placeholder="Description" [(ngModel)]="product.description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label class="col-form-label mt-4" for="promotion"
+                                    style="margin-left: 10px;" [ngStyle]="{ 'color' : (product.promotion < 0 || product.promotion > 100) ? 'red' : '' }">
+                                        <strong><i class="fas fa-percent"></i></strong> {{ (product.promotion < 0 || product.promotion > 100) ? 'Invalid promotion!' : 'Promotion:' }}</label>
+                                <input class="form-control" placeholder="Promotion" id="promotion" name="promotion" [(ngModel)]="product.promotion" step="0.01">
+                            </div>
+                            <div class="col" style="text-align: right;">
+
+                                <label class="col-form-label mt-4" for="price" style="margin-right: 10px;" 
+                                    [ngStyle]="{ 'color' : (product.price <= 0 && product.price != undefined) ? 'red' : '' }"><strong><i class="fas fa-dollar-sign"></i>
+                                    </strong> {{ (product.price <= 0 && product.price != undefined) ? 'Invalid price!' : 'Price:' }}</label>
+                                
+                                <input type="text" style="text-align:right;" class="form-control" placeholder="Price"
+                                    id="price" name="price" [(ngModel)]="product.price">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <input #Image class="form-control" type="file" id="image" (change)="handleFileInput($event)">
+                <div class="row" *ngIf="imgPreview" style="margin: 10px 10px">
+                    <div class="col align-self-center"><span>Image preview: </span></div>
+                    <div class="col">
+                        <label for="image">
+                            <img [src]="imgPreview" height="80px"/>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="col" style="align-self: center;">
+                <img *ngIf="product" [src]="getImage(product.imagePath)" class="card-img" alt="product.name">
+            </div>
+                <div class="row" style="text-align: right; padding: 10px;">
+                    <button *ngIf="product" [disabled]="product.imagePath == 'no-image.png'" (click)="onRemoveImage()" class="btn btn-primary">Remove image</button>
+                </div>
+        </div>
+    </form>
+</div>
+

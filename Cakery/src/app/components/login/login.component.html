@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <div id="formContent">
+
+    <div class="d-flex justify-content-center" style="margin-top: 20px;">
+      <h5><strong>Cakery Web Shop - Log In</strong></h5>
+    </div>
+
+    <div *ngIf="!isLoading">
+      <img src="../../../assets/icon.png" id="icon" alt="User Icon" />
+    </div>
+
+    <div *ngIf="isLoading">
+      <div class="spinner-border text-primary" role="status"
+        >
+        <span class="sr-only"></span>
+      </div>
+      <p>Loading...</p>
+    </div>
+
+    <div *ngIf="hasError" class="alert alert-dismissible alert-danger">
+      <strong>{{ error.error.error_description }}</strong>
+    </div>
+
+    <form>
+      <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username" [(ngModel)]="username">
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password" [(ngModel)]="password">
+    </form>
+
+    <div id="formFooter">
+        <button class="btn btn-primary btn-lg fadeIn fourth" (click)="onLogin()" >Log In <i class="fas fa-sign-in-alt"></i></button>
+        <br><br>
+        <a [routerLink]="['/register']"><i class="fas fa-user-circle"></i> Don't have an account? Register now!</a>
+    </div>
+
+  </div>
+</div>
